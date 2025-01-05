@@ -7,6 +7,7 @@ import { RpcCustomExceptionFilter } from './common';
 async function bootstrap() {
 
   const logger = new Logger('MAIN-GATEWAY')
+  console.log(envs.natsServers);
 
   const app = await NestFactory.create(AppModule);
   
