@@ -4,12 +4,12 @@ import { catchError } from 'rxjs';
 import { PaginationDto } from 'src/common';
 import { CreateProductDto } from 'src/common/dto/create-product.dto';
 import { UpdateProductDto } from 'src/common/dto/update-product.dto';
-import { PRODUCT_SERVICE } from 'src/config';
+import { NATS_SERVICE } from 'src/config';
 
 
 @Controller('product')
 export class ProductController {
-  constructor(@Inject(PRODUCT_SERVICE) private readonly client: ClientProxy) {}
+  constructor(@Inject(NATS_SERVICE) private readonly client: ClientProxy) {}
 
   @Post()
   createProduct(@Body() createProductDto: CreateProductDto){
