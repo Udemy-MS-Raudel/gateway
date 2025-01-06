@@ -16,6 +16,15 @@ export class RpcCustomExceptionFilter implements RpcExceptionFilter<RpcException
     const response = ctx.getResponse();
 
     const rpcError = exception.getError();
+
+
+    //En caso que hay un microservicio caido esto aqui lo detectara.
+    if( rpcError.toString().includes('Empty response')){
+      return response.status(500).json({
+        status: 500,
+        message: rpcError.toString().substring(0, rpcError.toString().indexOf('(') - 1)
+      })
+    }
     
     // console.log({rpcError});
     if(typeof rpcError === 'object' && 'status' in rpcError && 'message' in rpcError){

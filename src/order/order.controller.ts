@@ -13,12 +13,16 @@ export class OrderController {
 
   @Post()
   create(@Body() createOrderDto: CreateOrderDto) {
-    return this.client.send('create.order', createOrderDto);
+    return this.client.send('create.order', createOrderDto).pipe(
+      catchError(error => {throw new RpcException(error)})
+    );
   }
 
   @Get()
   findAll(@Query() orderPaginationDto: OrderPaginationDto) {
-    return this.client.send('find.all.order', orderPaginationDto);
+    return this.client.send('find.all.order', orderPaginationDto).pipe(
+      catchError(error => {throw new RpcException(error)})
+    );
   }
 
   @Get('id/:id')
